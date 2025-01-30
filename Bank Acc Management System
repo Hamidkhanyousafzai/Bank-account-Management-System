@@ -1,0 +1,87 @@
+#include <iostream>
+using namespace std;
+
+class BankAccount {
+private:
+    string owner;
+    double balance;
+
+public:
+    // Constructor to initialize account
+    BankAccount(string name, double initialBalance) {
+        owner = name;
+        balance = initialBalance;
+    }
+
+    // Function to deposit money
+    void deposit(double amount) {
+        if (amount > 0) {
+            balance += amount;
+            cout << "Deposit successful! New balance: $" << balance << endl;
+        } else {
+            cout << "Invalid amount! Deposit failed." << endl;
+        }
+    }
+
+    // Function to withdraw money
+    void withdraw(double amount) {
+        if (amount > 0 && amount <= balance) {
+            balance -= amount;
+            cout << "Withdrawal successful! Remaining balance: $" << balance << endl;
+        } else {
+            cout << "Invalid amount or insufficient funds!" << endl;
+        }
+    }
+
+    // Function to check balance
+    void checkBalance() {
+        cout << "Account Balance: $" << balance << endl;
+    }
+};
+
+int main() {
+    string name;
+    double initialDeposit;
+
+    // Get user details
+    cout << "Enter account holder name: ";
+    getline(cin, name);
+    cout << "Enter initial deposit amount: $";
+    cin >> initialDeposit;
+
+    // Create a bank account
+    BankAccount account(name, initialDeposit);
+
+    int choice;
+    do {
+        // Display menu
+        cout << "\nBank Account Menu:\n";
+        cout << "1. Deposit Money\n2. Withdraw Money\n3. Check Balance\n4. Exit\n";
+        cout << "Enter your choice: ";
+        cin >> choice;
+
+        if (choice == 1) { // Deposit
+            double amount;
+            cout << "Enter deposit amount: $";
+            cin >> amount;
+            account.deposit(amount);
+        } 
+        else if (choice == 2) { // Withdraw
+            double amount;
+            cout << "Enter withdrawal amount: $";
+            cin >> amount;
+            account.withdraw(amount);
+        } 
+        else if (choice == 3) { // Check Balance
+            account.checkBalance();
+        } 
+        else if (choice == 4) { // Exit
+            cout << "Thank you for using our banking system. Goodbye!\n";
+        } 
+        else {
+            cout << "Invalid choice! Please try again.\n";
+        }
+    } while (choice != 4);
+
+    return 0;
+}
